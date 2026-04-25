@@ -8,11 +8,13 @@
 
 ## 📌 Proje Özeti
 
-**HR Interview Studio**, yapay zeka destekli bir mülakat ajanıdır. Kullanıcıya seçtiği role özel sorular yöneltir, verilen cevapları değerlendirir ve detaylı geri bildirim üretir. İnsan kaynakları süreçlerini otomatize etmek veya adayların mülakatlara hazırlanmasına yardımcı olmak için kullanılabilir.
+**HR Interview Studio**, yapay zeka destekli bir mülakat simülasyon arayüzüdür. Kullanıcının girdiği pozisyon, deneyim seviyesi ve özgeçmiş (CV) detaylarına göre yerel bilgisayarda çalışan (LM Studio vb.) yapay zeka modelleriyle etkileşimli ve gerçek zamanlı (streaming) mülakatlar gerçekleştirir. Mülakat tamamlandığında, adayın dil bilgisi, teknik doğruluğu ve profesyonelliğine göre detaylı ve yapılandırılmış bir değerlendirme raporu sunar.
+
+Verilerin tamamen yerel (localhost) ortamda işlenmesi sayesinde kullanıcı gizliliği korunur.
 
 ---
 
-### Ekip Üyeleri
+### 👥 Ekip Üyeleri
 - Çağatay Candaş  
 - Gökdeniz Erten  
 - Furkan Kasalak  
@@ -21,35 +23,51 @@
 
 ## ✨ Özellikler
 
-- 🎯 **Rol Bazlı Mülakat** — Seçilen pozisyona (yazılım geliştirici, pazarlama uzmanı vb.) göre dinamik soru üretimi
-- 🤖 **LLM Dialog Agent** — Gerçekçi bir mülakat deneyimi sunan diyalog tabanlı yapay zeka ajanı
-- 📊 **Rubric Scoring** — Cevapları belirli kriterlere göre puanlayan nesnel değerlendirme sistemi
-- 📝 **Otomatik Geri Bildirim** — Her cevap için güçlü/zayıf yönleri içeren yapılandırılmış geri bildirim
-- 🔄 **Çoklu Tur Desteği** — Adayın performansına göre ilerleyen adaptif mülakat akışı
+- 🎯 **Dinamik Mülakat Kurgusu** — Seçilen pozisyon (yazılım geliştirici, pazarlama vb.), deneyim seviyesi ve adayın CV'sine özel, hedefe yönelik soru üretimi.
+- ⚡ **Gerçek Zamanlı Akış (SSE Streaming)** — Cevap beklerken zaman kaybettirmeyen, modelden yanıt geldikçe anında ekranda gösteren modern arayüz.
+- 🔒 **Güvenli ve Yerel Bağlantı** — Tüm süreç dış bir bulut hizmeti yerine doğrudan localhost (1234 portu) üzerinden LM Studio ile yönetilir.
+- 📝 **Otomatik ve Kapsamlı Geri Bildirim** — Mülakat bitiminde adayın güçlü/zayıf yönlerini, teknik tutarlılığını ve profesyonel üslubunu değerlendiren rapor ekranı.
 
 ---
 
 ## 🛠️ Kullanılan Teknolojiler
 
-| Teknoloji | Kullanım Amacı |
-|-----------|---------------|
-| **LLM Dialog Agent** | Doğal dil anlama, soru üretimi ve diyalog yönetimi |
-| **Rubric Scoring** | Cevapların ölçüt tabanlı puanlanması ve değerlendirme raporlaması |
+| Bileşen | Teknoloji | Kullanım Amacı |
+|-----------|-----------|---------------|
+| **Frontend** | React.js (Vite) + Tailwind CSS | Hızlı, modern ve dinamik mülakat arayüzünün oluşturulması |
+| **Backend** | Node.js + Express.js | İsteklerin yönetimi, prompt (sistem komutları) enjeksiyonu ve streaming |
+| **LLM Engine** | LM Studio (OpenAI API Formatı) | Yerel sunucu olarak çalışarak modellerin (örn. Llama 3) çalıştırılması |
+| **Bağlantı** | Server-Sent Events (SSE) | Metin akışının (stream) sağlanması |
 
 ---
 
+## 🚀 Nasıl Çalıştırılır?
 
-## 🔮 Yol Haritası
+Projeyi kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları sırasıyla uygulayın:
 
-- [ ] Çoklu dil desteği (Türkçe / İngilizce)
-- [ ] Video mülakat entegrasyonu
-- [ ] ATS (Applicant Tracking System) entegrasyonu
-- [ ] Gerçek zamanlı skor dashboard'u
-- [ ] Özelleştirilebilir rubric editörü
+### 1. LM Studio'yu Hazırlama
+1. LM Studio'yu açıp dilediğiniz bir Instruction modelini (örn. `meta-llama-3.1-8b-instruct`) yükleyin.
+2. Sağ menüden **Context Length** değerini (en az 8192) artırdığınızdan emin olun.
+3. Local Server'ı **Port 1234** üzerinden başlatın.
+
+### 2. Backend'i Başlatma
+Projenin ana dizininde bir terminal açıp arka uç sunucusunu başlatın:
+```bash
+cd backend
+npm install
+node server.js
+```
+*(Sunucu 3001 portunda çalışmaya başlayacaktır.)*
+
+### 3. Frontend'i Başlatma
+Ayrı bir terminal sekmesi açıp arayüz sunucusunu çalıştırın:
+```bash
+cd frontend
+npm install
+npm run dev
+```
+*(Uygulama `http://localhost:5173` adresinde açılacaktır.)*
 
 ---
-
-
-
 
 <p align="center"> HR Interview Studio</p>
